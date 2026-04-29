@@ -7,4 +7,4 @@ export const WebsiteSchema = new mongoose.Schema({
   alertType: { type: String, enum: ["email", "sms"], default: "email" },
   createdAt: { type: Date, default: Date.now },
 });
-export const WebsiteModel = mongoose.model("Website", WebsiteSchema);
+export const WebsiteModel = mongoose.model("Websites", WebsiteSchema);

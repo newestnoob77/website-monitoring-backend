@@ -31,4 +31,41 @@ export default class WebsiteController {
       throw new ApplicationError("Something went wrong", 500);
     }
   }
+  async getWebsiteById(req,res){
+    try{
+const {id}=req.params
+const website = await this.websiteRepository.getWebsiteById(id)
+if(!website) return res.status(404).send("website not found")
+return res.status(200).send(website)
+    }
+    catch(err){
+      console.log(err)
+      throw new ApplicationError("Something went wrong",500)
+    }
+  }
+    async updateWebsite(req,res){
+    try{
+const {id}=req.params
+console.log(`id:${id},req.body:${req.body}`)
+const website = await this.websiteRepository.updateWebsite(req.body,id)
+if(!website) return res.status(404).send("update failed")
+return res.status(200).send(website)
+    }
+    catch(err){
+      console.log(err)
+      throw new ApplicationError("Something went wrong",500)
+    }
+  }
+      async deleteWebsite(req,res){
+    try{
+const {id}=req.params
+const website = await this.websiteRepository.deleteWebsite(id)
+if(!website) return res.status(404).send("delete failed")
+return res.status(200).send("deleted successfully")
+    }
+    catch(err){
+      console.log(err)
+      throw new ApplicationError("Something went wrong",500)
+    }
+  }
 }
