@@ -5,6 +5,6 @@ export default class WebsiteRepository {
     return await new WebsiteModel(websiteDetails).save();
   }
   async getAllWebsite() {
-    return await new WebsiteModel.find();
+    return await WebsiteModel.find();
   }
 }

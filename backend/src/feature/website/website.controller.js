@@ -23,12 +23,12 @@ export default class WebsiteController {
   }
   async getAllMonitoringWebsite(req, res) {
     try {
-      const monitoredWebsite = await this.getAllMonitoringWebsite();
+      const monitoredWebsite = await this.websiteRepository.getAllWebsite();
       if (!monitoredWebsite) return res.status(400).send("no website found");
       return res.status(200).send(monitoredWebsite);
     } catch (err) {
       console.log(err);
-      throw new ApplicationError("Something went wrong");
+      throw new ApplicationError("Something went wrong", 500);
     }
   }
 }
