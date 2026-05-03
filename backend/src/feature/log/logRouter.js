@@ -11,7 +11,7 @@ logRouter.post("/", (req, res) => {
 
 // Fetch logs for a website
 logRouter.get("/:websiteId", (req, res) => {
-  logController.getLogsByWebsiteId(req, res);
+  logController.getLogsById(req, res);
 });
 
 // Fetch uptime report
