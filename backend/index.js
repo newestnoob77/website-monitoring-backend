@@ -6,10 +6,11 @@ import { connectMongodb } from "./src/config/config.js";
 import { monitoringRouter } from "./src/feature/website/website.router.js";
 import ApplicationError from "./src/middleware/applicationError.middleware.js";
 import { logRouter } from "./src/feature/log/logRouter.js";
+import MonitoringService from "./src/feature/monitor/monitor.service.js";
 const app = express();
 app.use(express.json());
 app.use("/api/website", monitoringRouter);
-app.use("/api/log",logRouter)
+app.use("/api/log", logRouter);
 app.use((err, req, res, next) => {
   if (err instanceof ApplicationError) {
     return res.status(err.code || 500).send(err.message);
@@ -23,4 +24,6 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
   console.log("Server is  listening 3000");
   connectMongodb();
+  const monitoringServices = new MonitoringService();
+  monitoringServices.startMonitoring();
 });
